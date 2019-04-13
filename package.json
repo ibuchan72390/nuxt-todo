@@ -1,0 +1,34 @@
+{
+  "name": "todo-example",
+  "version": "1.0.0",
+  "description": "My super-duper Nuxt.js project",
+  "author": "Ian Buchan",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.11",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.6.1",
+    "nuxt-buefy": "^0.3.2",
+    "nuxt-property-decorator": "^2.1.3",
+    "ts-node": "^8.0.3",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-jest": "^1.0.5",
+    "tslint-plugin-prettier": "^2.0.1"
+  },
+  "devDependencies": {
+    "@nuxt/typescript": "^2.6.1",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
+    "nodemon": "^1.18.9",
+    "vue-jest": "^3.0.3"
+  }
+}

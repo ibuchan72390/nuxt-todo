@@ -1,0 +1,13 @@
+// https://github.com/prettier/tslint-plugin-prettier#usage
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-plugin-prettier",
+    "tslint-config-prettier",
+    "tslint-jest"
+  ],
+  "rules": {
+    "prettier": true,
+    "max-classes-per-file": false
+  }
+}
