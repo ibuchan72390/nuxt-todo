@@ -32,6 +32,9 @@ export default class TodoFormMulti extends Vue {
   @todoForm.Action(TodoFormMultiStoreKeys.actions.submitKey)
   public submitFn: (key: string) => Promise<void>
 
+  @todoForm.Mutation(TodoFormMultiStoreKeys.mutations.initialize)
+  private initFn: (key: string) => void
+
   @todoForm.Getter(TodoFormMultiStoreKeys.getters.getTitleFn)
   private storeTitle: (key: string) => string
 
@@ -42,6 +45,10 @@ export default class TodoFormMulti extends Vue {
 
   public submit() {
     this.submitFn(this.internalKey)
+  }
+
+  public created() {
+    this.initFn(this.internalKey)
   }
 }
 </script>

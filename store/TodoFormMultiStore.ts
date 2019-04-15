@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex'
 
 import {
@@ -5,7 +6,8 @@ import {
   ITodoFormMultiState,
   Todo,
   TodoFormMultiStoreKeys,
-  TodoStoreKeys
+  TodoStoreKeys,
+  ITodoFormState
 } from '@/models'
 import { StringKeyValue } from '@/models/KeyValue'
 
@@ -19,32 +21,46 @@ const state = (): ITodoFormMultiState => {
 
 const getters: GetterTree<ITodoFormMultiState, IRootState> = {
   [TodoFormMultiStoreKeys.getters.canSubmitFn](
-    STATE: ITodoFormMultiState,
-    key: string
-  ): boolean {
-    const item = STATE.data[key]
+    STATE: ITodoFormMultiState
+  ): (key: string) => boolean {
+    return (key: string): boolean => {
+      const item = STATE.data[key]
+      // tslint:disable-next-line: no-console
+      console.log('Checking can submit')
+      if (item) {
+        return item.title.length > 0
+      }
 
-    if (item) {
-      return item.title.length > 0
+      return false
     }
-
-    return false
   },
 
   [TodoFormMultiStoreKeys.getters.getTitleFn](
-    STATE: ITodoFormMultiState,
-    key: string
-  ): string {
-    const item = STATE.data[key]
+    STATE: ITodoFormMultiState
+  ): (key: string) => string {
+    return (key: string) => {
+      const item = STATE.data[key]
 
-    if (item) {
-      return item.title
+      if (item) {
+        return item.title
+      }
+      return ''
     }
-    return ''
   }
 }
 
 const mutations: MutationTree<ITodoFormMultiState> = {
+  [TodoFormMultiStoreKeys.mutations.initialize](
+    STATE: ITodoFormMultiState,
+    key: string
+  ): void {
+    const newState: ITodoFormState = {
+      title: ''
+    }
+
+    Vue.set(STATE.data, key, newState)
+  },
+
   [TodoFormMultiStoreKeys.mutations.setKeyedTitleFn](
     STATE: ITodoFormMultiState,
     keyValue: StringKeyValue<string>
@@ -73,7 +89,7 @@ const actions: ActionTree<ITodoFormMultiState, IRootState> = {
 
     context.commit(TodoFormMultiStoreKeys.mutations.setKeyedTitleFn, {
       key,
-      value: ''
+      val: ''
     })
 
     context.commit(
